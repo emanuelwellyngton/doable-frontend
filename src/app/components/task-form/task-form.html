@@ -1,0 +1,29 @@
+<div class="task-form-overlay">
+    <div class="task-form-container">
+        <h2 class="form-title">{{ task ? 'Edit Task' : 'New Task' }}</h2>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" id="title" formControlName="title" placeholder="What needs to be done?">
+                <div class="error-message"
+                    *ngIf="form.get('title')?.touched && form.get('title')?.hasError('required')">
+                    Title is required
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" formControlName="description" rows="4"
+                    placeholder="Add some details..."></textarea>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" (click)="cancel.emit()">Cancel</button>
+                <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+                    {{ task ? 'Save Changes' : 'Create Task' }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

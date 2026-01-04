@@ -1,0 +1,20 @@
+<div class="task-card" [class.done]="task.status === 'DONE'">
+    <div class="card-header">
+        <div class="status-toggle" (click)="toggleStatus()">
+            <lucide-icon [img]="task.status === 'DONE' ? CheckCircle : Circle"
+                [class]="task.status === 'DONE' ? 'icon-done' : 'icon-todo'"></lucide-icon>
+        </div>
+        <h3 class="task-title" [class.strikethrough]="task.status === 'DONE'">{{ task.title }}</h3>
+    </div>
+
+    <p class="task-desc" *ngIf="task.description">{{ task.description }}</p>
+
+    <div class="card-actions">
+        <button class="btn-icon" (click)="edit.emit(task)" title="Edit">
+            <lucide-icon [img]="Edit2"></lucide-icon>
+        </button>
+        <button class="btn-icon danger" (click)="delete.emit(task)" title="Delete">
+            <lucide-icon [img]="Trash2"></lucide-icon>
+        </button>
+    </div>
+</div>

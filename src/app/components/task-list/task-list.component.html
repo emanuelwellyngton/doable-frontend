@@ -1,0 +1,28 @@
+<main class="main-container">
+    <div class="actions-bar">
+        <div class="stats">
+            <span class="stat-item">Tasks <span class="badge">{{ tasks.length }}</span></span>
+            <span class="stat-item done">Done <span class="badge">{{ completedCount }}</span></span>
+        </div>
+
+        <button class="btn-create" (click)="openCreateForm()">
+            Create Task
+            <lucide-icon [img]="Plus"></lucide-icon>
+        </button>
+    </div>
+
+    <div class="task-list" *ngIf="tasks.length > 0; else emptyState">
+        <app-task-card *ngFor="let task of tasks" [task]="task" (statusChange)="handleStatusChange($event)"
+            (edit)="openEditForm($event)" (delete)="handleDelete($event)"></app-task-card>
+    </div>
+
+    <ng-template #emptyState>
+        <div class="empty-state">
+            <lucide-icon [img]="ClipboardList" class="empty-icon"></lucide-icon>
+            <p class="empty-text">You have no tasks registered yet.</p>
+            <p class="empty-subtext">Create tasks and organize your to-do items.</p>
+        </div>
+    </ng-template>
+</main>
+
+<app-task-form *ngIf="showForm" [task]="editingTask" (save)="handleSave($event)" (cancel)="closeForm()"></app-task-form>
