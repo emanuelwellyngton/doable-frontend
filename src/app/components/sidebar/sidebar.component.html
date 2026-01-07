@@ -1,0 +1,44 @@
+<div class="sidebar-overlay" *ngIf="uiService.isSidebarOpen()" (click)="uiService.closeSidebar()"></div>
+
+<aside class="sidebar" [class.open]="uiService.isSidebarOpen()">
+  <div class="brand">
+    <div class="brand-logo">
+      <lucide-icon [img]="CheckSquare" class="logo-icon"></lucide-icon>
+    </div>
+    <span class="brand-name">Doable</span>
+  </div>
+
+  <nav class="nav-links">
+    <a routerLink="/tasks" routerLinkActive="active" class="nav-item">
+      <lucide-icon [img]="ListTodo"></lucide-icon>
+      <span>All Tasks</span>
+    </a>
+    <a routerLink="/completed" routerLinkActive="active" class="nav-item">
+      <lucide-icon [img]="CheckSquare"></lucide-icon>
+      <span>Completed</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <a routerLink="/settings" routerLinkActive="active" class="nav-item">
+      <lucide-icon [img]="Settings"></lucide-icon>
+      <span>Settings</span>
+    </a>
+
+    <button class="btn-new-task" (click)="createNewTask()">
+      <lucide-icon [img]="Plus"></lucide-icon>
+      <span>New Task</span>
+    </button>
+
+    <div class="user-profile">
+      <div class="avatar">
+        <!-- Placeholder or Initials -->
+        <span>AM</span>
+      </div>
+      <div class="user-info">
+        <span class="user-name">Alex Morgan</span>
+        <span class="user-email">alex@doable.com</span>
+      </div>
+    </div>
+  </div>
+</aside>

@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+export type TaskStatus = 'TO_DO' | 'IN_PROGRESS' | 'DONE';
+
 export interface Task {
     id: number;
     title: string;
     description: string;
-    status: string; // 'TODO', 'DONE'
+    status: TaskStatus;
     createdAt?: string;
     updatedAt?: string;
 }

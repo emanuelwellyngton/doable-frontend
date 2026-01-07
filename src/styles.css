@@ -10,6 +10,7 @@
   --color-border: #29292e;
   --color-success: #04d361;
   --color-danger: #f75a68;
+  --color-header: #1c1c1f;
 
   --font-family: 'Inter', sans-serif;
 
@@ -34,27 +35,44 @@ body {
   font-family: var(--font-family);
   -webkit-font-smoothing: antialiased;
   line-height: 1.5;
+  height: 100vh;
+  overflow: hidden; /* App-like feel */
 }
 
+/* Common Components */
 button {
   cursor: pointer;
   border: none;
   font-family: inherit;
   transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
-input, textarea {
+input, textarea, select {
   font-family: inherit;
   color: var(--color-text-primary);
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--color-primary);
+  border-color: transparent;
 }
 
 /* Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-background);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {

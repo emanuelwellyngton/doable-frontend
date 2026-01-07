@@ -22,7 +22,7 @@ export class TaskCard {
   readonly Circle = Circle;
 
   toggleStatus() {
-    const newStatus = this.task.status === 'DONE' ? 'TODO' : 'DONE';
+    const newStatus = this.task.status === 'DONE' ? 'TO_DO' : 'DONE';
     this.statusChange.emit({ ...this.task, status: newStatus });
   }
 }

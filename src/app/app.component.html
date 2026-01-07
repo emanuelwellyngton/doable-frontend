@@ -1,2 +1,10 @@
-<app-header></app-header>
-<router-outlet></router-outlet>
+<div class="app-container">
+    <button class="mobile-menu-btn" (click)="uiService.openSidebar()">
+        <lucide-icon [img]="Menu"></lucide-icon>
+    </button>
+    <app-sidebar></app-sidebar>
+    <div class="content-area">
+        <router-outlet></router-outlet>
+    </div>
+    <app-task-form></app-task-form>
+</div>

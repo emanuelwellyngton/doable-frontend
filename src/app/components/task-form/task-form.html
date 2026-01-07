@@ -1,29 +1,85 @@
-<div class="task-form-overlay">
-    <div class="task-form-container">
-        <h2 class="form-title">{{ task ? 'Edit Task' : 'New Task' }}</h2>
+<div class="task-form-overlay" *ngIf="uiService.isTaskModalOpen()" (click)="close()">
+    <div class="task-form-container" (click)="$event.stopPropagation(); isStatusDropdownOpen = false">
 
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <div class="form-group">
-                <label for="title">Title</label>
-                <input type="text" id="title" formControlName="title" placeholder="What needs to be done?">
-                <div class="error-message"
-                    *ngIf="form.get('title')?.touched && form.get('title')?.hasError('required')">
-                    Title is required
+        <!-- Header -->
+        <div class="form-header">
+            <div class="status-dropdown-container">
+                <div class="status-badge" (click)="toggleStatusDropdown($event)">
+                    <span class="status-dot"></span>
+                    <span>
+                        <ng-container [ngSwitch]="form.get('status')?.value">
+                            <span *ngSwitchCase="'DONE'">Done</span>
+                            <span *ngSwitchCase="'IN_PROGRESS'">In Progress</span>
+                            <span *ngSwitchDefault>To Do</span>
+                        </ng-container>
+                    </span>
+                    <lucide-icon [img]="ChevronDown" size="14"></lucide-icon>
+                </div>
+
+                <div class="status-menu" *ngIf="isStatusDropdownOpen">
+                    <div class="status-item" (click)="setStatus('TO_DO')">
+                        <span class="status-dot todo"></span>
+                        <span>To Do</span>
+                        <lucide-icon *ngIf="form.get('status')?.value === 'TO_DO'" [img]="CheckCircle" size="14"
+                            class="check-icon"></lucide-icon>
+                    </div>
+                    <div class="status-item" (click)="setStatus('IN_PROGRESS')">
+                        <span class="status-dot progress"></span>
+                        <span>In Progress</span>
+                        <lucide-icon *ngIf="form.get('status')?.value === 'IN_PROGRESS'" [img]="CheckCircle" size="14"
+                            class="check-icon"></lucide-icon>
+                    </div>
+                    <div class="status-item" (click)="setStatus('DONE')">
+                        <span class="status-dot done"></span>
+                        <span>Done</span>
+                        <lucide-icon *ngIf="form.get('status')?.value === 'DONE'" [img]="CheckCircle" size="14"
+                            class="check-icon"></lucide-icon>
+                    </div>
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="description">Description</label>
-                <textarea id="description" formControlName="description" rows="4"
-                    placeholder="Add some details..."></textarea>
+            <button class="btn-close" (click)="close()">
+                <lucide-icon [img]="X"></lucide-icon>
+            </button>
+        </div>
+
+        <!-- Body -->
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-body">
+
+            <!-- Title Row -->
+            <div class="title-group">
+                <lucide-icon [img]="Circle" class="title-icon" size="24"></lucide-icon>
+                <input type="text" formControlName="title" class="title-input" placeholder="Task Name"
+                    autocomplete="off">
             </div>
 
-            <div class="form-actions">
-                <button type="button" class="btn btn-secondary" (click)="cancel.emit()">Cancel</button>
-                <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
-                    {{ task ? 'Save Changes' : 'Create Task' }}
-                </button>
+            <!-- Description -->
+            <div class="description-group">
+                <span class="description-label">DESCRIPTION</span>
+                <textarea formControlName="description" class="description-input"
+                    placeholder="Add a more detailed description..."></textarea>
+
+                <div class="meta-info" *ngIf="isEditing">
+                    <span>Created on {{ uiService.editingTask()?.createdAt || 'Oct 24, 2023' }}</span>
+                    <span>Last updated 2 hours ago</span>
+                </div>
             </div>
+
         </form>
+
+        <!-- Footer -->
+        <div class="form-footer">
+            <button type="button" class="btn-delete" *ngIf="isEditing" (click)="deleteTask()">
+                <lucide-icon [img]="Trash2" size="18"></lucide-icon>
+                <span>Delete</span>
+            </button>
+            <div class="spacer" *ngIf="!isEditing"></div> <!-- Spacer to push buttons right if no delete -->
+
+            <div class="footer-right">
+                <button type="button" class="btn-cancel" (click)="close()">Close</button>
+                <button type="button" class="btn-save" (click)="onSubmit()">Save</button>
+            </div>
+        </div>
+
     </div>
 </div>

@@ -1,106 +1,266 @@
-.main-container {
-    max-width: 800px;
+.task-list-container {
+    padding: 2rem 3rem;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1rem 4rem;
 }
 
-.actions-bar {
+.page-header {
+    margin-bottom: 2rem;
+}
+
+.header-main {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 0.25rem;
+}
+
+h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+}
+
+.date-display {
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+}
+
+.header-subtitle {
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Controls Bar */
+.controls-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 3rem;
-    flex-wrap: wrap;
-    gap: 1rem;
+    margin-bottom: 1.5rem;
+    background-color: transparent;
 }
 
-.stats {
-    display: flex;
-    gap: 1rem;
+.search-wrapper {
+    position: relative;
+    width: 320px;
 }
 
-.stat-item {
-    font-size: 0.875rem;
-    font-weight: 700;
-    color: var(--color-primary);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+.search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-secondary);
+    width: 16px;
+    height: 16px;
 }
 
-.stat-item.done {
-    color: var(--color-primary-hover);
-    /* Or a different color like blue */
-}
-
-.badge {
+.search-wrapper input {
+    width: 100%;
+    padding-left: 2.5rem;
     background-color: var(--color-surface);
-    color: var(--color-text-primary);
-    padding: 2px 8px;
-    border-radius: 999px;
-    font-size: 0.75rem;
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
 }
 
-.btn-create {
-    background-color: var(--color-primary);
-    color: white;
-    padding: 0.75rem 1rem;
-    border-radius: var(--radius-md);
-    font-weight: 600;
-    font-size: 0.875rem;
+.search-wrapper input:focus {
+    background-color: var(--color-background);
+    border-color: var(--color-primary);
+}
+
+.filters {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.dropdown-trigger {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    transition: background-color 0.2s;
+    background-color: var(--color-surface);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-md);
+    border: 1px solid transparent;
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all 0.2s;
 }
 
-.btn-create:hover {
-    background-color: var(--color-primary-hover);
+.dropdown-trigger:hover {
+    background-color: var(--color-surface-hover);
+    color: var(--color-text-primary);
 }
 
-.task-list {
+.view-toggles {
     display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+    background-color: var(--color-surface);
+    padding: 2px;
+    border-radius: var(--radius-md);
 }
 
-.empty-state {
+.view-btn {
+    padding: 0.4rem;
+    background: transparent;
+    color: var(--color-text-secondary);
+    border-radius: var(--radius-sm);
+}
+
+.view-btn.active {
+    background-color: var(--color-element);
+    color: var(--color-text-primary);
+}
+
+/* Task Grid */
+.task-grid {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.grid-header {
     display: flex;
-    flex-direction: column;
+    padding: 0.75rem 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.task-row {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+    transition: background-color 0.1s;
+}
+
+.task-row:last-child {
+    border-bottom: none;
+}
+
+.task-row:hover {
+    background-color: var(--color-surface-hover);
+}
+
+.col-check {
+    width: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.col-name {
+    flex: 1;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.col-status {
+    width: 120px;
+}
+
+.col-actions {
+    width: 60px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Custom Checkbox */
+.custom-checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-text-secondary);
+    border-radius: 4px;
+    display: flex;
     align-items: center;
     justify-content: center;
-    padding: 4rem 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.custom-checkbox:hover {
+    border-color: var(--color-primary);
+}
+
+.custom-checkbox.checked {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.col-name span.completed {
+    text-decoration: line-through;
+    color: var(--color-text-secondary);
+}
+
+/* Status Badge */
+.badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.badge-todo {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-text-primary);
+}
+
+.badge-done {
+    background-color: rgba(4, 211, 97, 0.15);
+    color: var(--color-success);
+}
+
+.btn-icon {
+    background: transparent;
+    color: var(--color-text-secondary);
+    padding: 0.25rem;
+}
+
+.btn-icon:hover {
+    color: var(--color-text-primary);
+}
+
+.pagination {
+    padding: 1rem 1.5rem;
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
     border-top: 1px solid var(--color-border);
-    border-radius: 8px;
-    color: var(--color-text-secondary);
-    text-align: center;
 }
 
-.empty-icon {
-    width: 56px;
-    height: 56px;
-    margin-bottom: 1rem;
-    opacity: 0.5;
-}
-
-.empty-text {
-    font-weight: 700;
-    color: var(--color-text-secondary);
-    margin-bottom: 0.5rem;
-}
-
-.empty-subtext {
-    font-size: 0.875rem;
-}
-
-/* Responsive adjustments */
-@media (max-width: 500px) {
-    .actions-bar {
-        flex-direction: column;
-        align-items: stretch;
+@media (max-width: 768px) {
+    .task-list-container {
+        padding: 4rem 1rem 1rem 1rem;
+        /* Increase top padding for menu button */
     }
 
-    .btn-create {
+    .controls-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+
+    .search-wrapper {
         width: 100%;
-        justify-content: center;
+    }
+
+    .filters {
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+    }
+
+    .col-status,
+    .col-actions {
+        display: none;
+    }
+
+    .task-row {
+        padding: 0.75rem 1rem;
     }
 }

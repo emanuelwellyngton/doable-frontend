@@ -1,28 +1,69 @@
-<main class="main-container">
-    <div class="actions-bar">
-        <div class="stats">
-            <span class="stat-item">Tasks <span class="badge">{{ tasks.length }}</span></span>
-            <span class="stat-item done">Done <span class="badge">{{ completedCount }}</span></span>
+<div class="task-list-container">
+    <header class="page-header">
+        <div class="header-main">
+            <h1>My Tasks</h1>
+            <span class="date-display">{{ currentDate | date:'MMM d, y' }}</span>
+        </div>
+        <p class="header-subtitle">Manage your daily priorities and track progress.</p>
+    </header>
+
+    <div class="controls-bar">
+        <div class="search-wrapper">
+            <lucide-icon [img]="Search" class="search-icon"></lucide-icon>
+            <input type="text" placeholder="Search tasks..." [formControl]="searchControl">
         </div>
 
-        <button class="btn-create" (click)="openCreateForm()">
-            Create Task
-            <lucide-icon [img]="Plus"></lucide-icon>
-        </button>
-    </div>
-
-    <div class="task-list" *ngIf="tasks.length > 0; else emptyState">
-        <app-task-card *ngFor="let task of tasks" [task]="task" (statusChange)="handleStatusChange($event)"
-            (edit)="openEditForm($event)" (delete)="handleDelete($event)"></app-task-card>
-    </div>
-
-    <ng-template #emptyState>
-        <div class="empty-state">
-            <lucide-icon [img]="ClipboardList" class="empty-icon"></lucide-icon>
-            <p class="empty-text">You have no tasks registered yet.</p>
-            <p class="empty-subtext">Create tasks and organize your to-do items.</p>
+        <div class="filters">
+            <div class="dropdown-trigger">
+                <span>Status: All</span>
+                <lucide-icon [img]="ChevronDown" size="16"></lucide-icon>
+            </div>
+            <div class="dropdown-trigger">
+                <span>Sort: Date</span>
+                <lucide-icon [img]="ListFilter" size="16"></lucide-icon>
+            </div>
+            <div class="view-toggles">
+                <button class="view-btn active"><lucide-icon [img]="LayoutGrid" size="18"></lucide-icon></button>
+                <button class="view-btn"><lucide-icon [img]="List" size="18"></lucide-icon></button>
+            </div>
         </div>
-    </ng-template>
-</main>
+    </div>
 
-<app-task-form *ngIf="showForm" [task]="editingTask" (save)="handleSave($event)" (cancel)="closeForm()"></app-task-form>
+    <div class="task-grid">
+        <div class="grid-header">
+            <div class="col-check"></div>
+            <div class="col-name">TASK NAME</div>
+            <div class="col-status">STATUS</div>
+            <div class="col-actions">ACTIONS</div>
+        </div>
+
+        <div class="task-row" *ngFor="let task of filteredTasks">
+            <div class="col-check">
+                <div class="custom-checkbox" [class.checked]="task.status === 'DONE'" (click)="toggleStatus(task)">
+                    <lucide-icon *ngIf="task.status === 'DONE'" [img]="Check" size="12" color="white"></lucide-icon>
+                </div>
+            </div>
+
+            <div class="col-name" (click)="openTask(task)">
+                <span [class.completed]="task.status === 'DONE'">{{ task.title }}</span>
+            </div>
+
+            <div class="col-status">
+                <span class="badge" [class.badge-done]="task.status === 'DONE'"
+                    [class.badge-todo]="task.status === 'TO_DO'">
+                    {{ task.status === 'DONE' ? 'Done' : (task.status === 'IN_PROGRESS' ? 'In Progress' : 'To Do') }}
+                </span>
+            </div>
+
+            <div class="col-actions">
+                <button class="btn-icon" (click)="openTask(task)">
+                    <lucide-icon [img]="MoreVertical" size="16"></lucide-icon>
+                </button>
+            </div>
+        </div>
+
+        <div class="pagination">
+            <span>Showing {{ filteredTasks.length }} tasks</span>
+        </div>
+    </div>
+</div>

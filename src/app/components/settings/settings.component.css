@@ -1,0 +1,229 @@
+.settings-container {
+    padding: 3rem;
+    max-width: 900px;
+    margin: 0 auto;
+    color: var(--color-text-primary);
+}
+
+.header {
+    margin-bottom: 3rem;
+}
+
+.header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.header p {
+    color: var(--color-text-secondary);
+}
+
+.settings-section {
+    margin-bottom: 3rem;
+}
+
+.settings-section h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.section-desc {
+    color: var(--color-text-secondary);
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.card {
+    background-color: transparent;
+    /* Design shows implicit or very subtle background, actually looks like just fields on the bg or a border container. */
+    /* Screenshot implies a border container */
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    background-color: var(--color-surface);
+    /* Assuming surface logic or transparent if it matches body */
+    background-color: transparent;
+    border: 1px solid var(--color-border);
+}
+
+/* Account Section */
+.profile-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.avatar-large {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: #EBCB8B;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #3b3020;
+    font-weight: 600;
+}
+
+.profile-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.btn-secondary {
+    background-color: var(--color-element);
+    color: var(--color-text-primary);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-border);
+}
+
+.btn-text {
+    background-color: transparent;
+    padding: 0.5rem;
+}
+
+.btn-text.danger {
+    color: var(--color-danger);
+}
+
+.form-row {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.form-group input {
+    background-color: #121214;
+    /* Darker than card usually */
+    border: 1px solid var(--color-border);
+    padding: 0.75rem;
+    border-radius: var(--radius-sm);
+}
+
+/* Appearance Section */
+.theme-options {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.theme-option {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    background: transparent;
+    border: none;
+    color: var(--color-text-secondary);
+}
+
+.theme-option span {
+    font-size: 0.9rem;
+}
+
+.theme-preview {
+    width: 100%;
+    height: 100px;
+    /* approximated */
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background-color: var(--color-surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.theme-option.active .theme-preview {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(130, 87, 229, 0.2);
+    /* ring */
+}
+
+.theme-option.active span {
+    color: var(--color-text-primary);
+}
+
+/* Notifications Section */
+.notification-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+}
+
+.notification-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.notification-title {
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.notification-desc {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+}
+
+.divider {
+    height: 1px;
+    background-color: var(--color-border);
+    margin: 1rem 0;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+    width: 44px;
+    height: 24px;
+    background-color: var(--color-element);
+    border-radius: 999px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.toggle-switch.checked {
+    background-color: var(--color-primary);
+    /* Blue/Primary in screenshot */
+    background-color: #3b82f6;
+    /* Actually looks blue in screenshot */
+}
+
+.toggle-thumb {
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.2s;
+}
+
+.toggle-switch.checked .toggle-thumb {
+    transform: translateX(20px);
+}
