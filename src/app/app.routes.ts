@@ -5,11 +5,6 @@ import { taskResolver } from './resolvers/task.resolver';
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: 'tasks',
-        pathMatch: 'full'
-    },
-    {
-        path: 'tasks',
         component: TaskListComponent,
         resolve: {
             tasks: taskResolver
