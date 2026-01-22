@@ -17,7 +17,7 @@ export interface Task {
     providedIn: 'root'
 })
 export class TaskService {
-    private apiUrl = 'http://3.21.92.86:8080/api/tasks';
+    private apiUrl = 'https://api.wellyngton.dev/api/tasks';
 
     constructor(private http: HttpClient) { }
 
