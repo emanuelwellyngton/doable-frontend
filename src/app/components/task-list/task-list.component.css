@@ -217,6 +217,11 @@ h1 {
     color: var(--color-success);
 }
 
+.badge-in-progress {
+    color: var(--color-primary);
+    background-color: rgba(130, 87, 229, 0.1);
+}
+
 .btn-icon {
     background: transparent;
     color: var(--color-text-secondary);

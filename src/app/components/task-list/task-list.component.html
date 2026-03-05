@@ -50,7 +50,8 @@
 
             <div class="col-status">
                 <span class="badge" [class.badge-done]="task.status === 'DONE'"
-                    [class.badge-todo]="task.status === 'TO_DO'">
+                    [class.badge-todo]="task.status === 'TO_DO'"
+                    [class.badge-in-progress]="task.status === 'IN_PROGRESS'">
                     {{ task.status === 'DONE' ? 'Done' : (task.status === 'IN_PROGRESS' ? 'In Progress' : 'To Do') }}
                 </span>
             </div>
