@@ -1,12 +1,12 @@
 <div class="sidebar-overlay" *ngIf="uiService.isSidebarOpen()" (click)="uiService.closeSidebar()"></div>
 
 <aside class="sidebar" [class.open]="uiService.isSidebarOpen()">
-  <div class="brand">
+  <a class="brand" href="/">
     <div class="brand-logo">
       <lucide-icon [img]="CheckSquare" class="logo-icon"></lucide-icon>
     </div>
     <span class="brand-name">Doable</span>
-  </div>
+  </a>
 
   <nav class="nav-links">
     <a routerLink="/tasks" routerLinkActive="active" class="nav-item">

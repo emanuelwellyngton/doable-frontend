@@ -133,6 +133,10 @@
     text-overflow: ellipsis;
 }
 
+a {
+    text-decoration: none;
+}
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
     .sidebar {
