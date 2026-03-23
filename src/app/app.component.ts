@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { TaskForm } from './components/task-form/task-form';
 import { LucideAngularModule, Menu } from 'lucide-angular';
 import { UiService } from './services/ui.service';
+import { AuthService } from './services/auth.service';
+import { filter } from 'rxjs';
 
 @Component({
     selector: 'app-root',
@@ -17,5 +19,13 @@ export class AppComponent {
     title = 'doable-frontend';
     readonly Menu = Menu;
 
-    constructor(public uiService: UiService) { }
+    isAuthRoute = signal(false);
+
+    constructor(public uiService: UiService, public authService: AuthService, router: Router) {
+        router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe((e) => {
+            const url = (e as NavigationEnd).urlAfterRedirects;
+            this.isAuthRoute.set(url.startsWith('/sign-in') || url.startsWith('/sign-up'));
+        });
+    }
 }
+

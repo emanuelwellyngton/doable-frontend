@@ -1,10 +1,16 @@
-<div class="app-container">
+<ng-container *ngIf="!isAuthRoute(); else authLayout">
     <button class="mobile-menu-btn" (click)="uiService.openSidebar()">
         <lucide-icon [img]="Menu"></lucide-icon>
     </button>
-    <app-sidebar></app-sidebar>
-    <div class="content-area">
-        <router-outlet></router-outlet>
+    <div class="app-container">
+        <app-sidebar></app-sidebar>
+        <div class="content-area">
+            <router-outlet></router-outlet>
+        </div>
+        <app-task-form></app-task-form>
     </div>
-    <app-task-form></app-task-form>
-</div>
+</ng-container>
+
+<ng-template #authLayout>
+    <router-outlet></router-outlet>
+</ng-template>

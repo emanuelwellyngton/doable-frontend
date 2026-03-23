@@ -1,0 +1,81 @@
+<div class="auth-page">
+    <div class="auth-card">
+        <div class="auth-header">
+            <div class="brand-logo">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 11 12 14 22 4" />
+                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                </svg>
+            </div>
+            <h1 class="brand-name">Doable</h1>
+            <p class="auth-subtitle">Create your account</p>
+        </div>
+
+        <form class="auth-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="username" class="form-label">Username</label>
+                <input id="username" type="text" class="form-input" formControlName="username"
+                    placeholder="Choose a username (3–50 chars)" autocomplete="username"
+                    [class.error]="form.get('username')?.invalid && form.get('username')?.touched" />
+                @if (form.get('username')?.invalid && form.get('username')?.touched) {
+                <span class="field-error">Username must be 3–50 characters.</span>
+                }
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="form-label">Password</label>
+                <div class="input-wrapper">
+                    <input id="password" [type]="showPassword() ? 'text' : 'password'" class="form-input"
+                        formControlName="password" placeholder="At least 8 characters" autocomplete="new-password"
+                        [class.error]="form.get('password')?.invalid && form.get('password')?.touched" />
+                    <button type="button" class="toggle-password" (click)="togglePassword()"
+                        aria-label="Toggle password visibility">
+                        <lucide-icon [img]="showPassword() ? EyeOff : Eye" [size]="18"></lucide-icon>
+                    </button>
+                </div>
+                @if (form.get('password')?.invalid && form.get('password')?.touched) {
+                <span class="field-error">Password must be at least 8 characters.</span>
+                }
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword" class="form-label">Confirm Password</label>
+                <div class="input-wrapper">
+                    <input id="confirmPassword" [type]="showConfirm() ? 'text' : 'password'" class="form-input"
+                        formControlName="confirmPassword" placeholder="Repeat your password" autocomplete="new-password"
+                        [class.error]="form.errors?.['passwordMismatch'] && form.get('confirmPassword')?.touched" />
+                    <button type="button" class="toggle-password" (click)="toggleConfirm()"
+                        aria-label="Toggle confirm password visibility">
+                        <lucide-icon [img]="showConfirm() ? EyeOff : Eye" [size]="18"></lucide-icon>
+                    </button>
+                </div>
+                @if (form.errors?.['passwordMismatch'] && form.get('confirmPassword')?.touched) {
+                <span class="field-error">Passwords do not match.</span>
+                }
+            </div>
+
+            @if (errorMessage()) {
+            <div class="alert alert-error">{{ errorMessage() }}</div>
+            }
+            @if (successMessage()) {
+            <div class="alert alert-success">{{ successMessage() }}</div>
+            }
+
+            <button type="submit" class="btn-primary" [disabled]="form.invalid || isLoading()">
+                @if (isLoading()) {
+                <span class="spinner"></span>
+                Creating account…
+                } @else {
+                <lucide-icon [img]="UserPlus" [size]="18"></lucide-icon>
+                Create Account
+                }
+            </button>
+        </form>
+
+        <p class="auth-footer">
+            Already have an account?
+            <a routerLink="/sign-in" class="auth-link">Sign in</a>
+        </p>
+    </div>
+</div>

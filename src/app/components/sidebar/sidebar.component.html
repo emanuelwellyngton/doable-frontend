@@ -32,13 +32,15 @@
 
     <div class="user-profile">
       <div class="avatar">
-        <!-- Placeholder or Initials -->
-        <span>AM</span>
+        <span>{{ (authService.username() | slice:0:2) | uppercase }}</span>
       </div>
       <div class="user-info">
-        <span class="user-name">Alex Morgan</span>
-        <span class="user-email">alex@doable.com</span>
+        <span class="user-name">{{ authService.username() }}</span>
       </div>
+      <button class="btn-logout" (click)="logout()" title="Sign out">
+        <lucide-icon [img]="LogOut" [size]="18"></lucide-icon>
+      </button>
     </div>
   </div>
+
 </aside>

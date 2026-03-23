@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, SlicePipe, UpperCasePipe } from '@angular/common';
 import { Router, RouterModule, RouterLinkActive } from '@angular/router';
-import { LucideAngularModule, CheckSquare, ListTodo, Settings, Plus, User } from 'lucide-angular';
+import { LucideAngularModule, CheckSquare, ListTodo, Settings, Plus, LogOut } from 'lucide-angular';
 import { UiService } from '../../services/ui.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
     selector: 'app-sidebar',
     standalone: true,
-    imports: [CommonModule, RouterModule, LucideAngularModule],
+    imports: [CommonModule, RouterModule, LucideAngularModule, SlicePipe, UpperCasePipe],
     templateUrl: './sidebar.component.html',
     styleUrls: ['./sidebar.component.css']
 })
@@ -16,11 +17,16 @@ export class SidebarComponent {
     readonly ListTodo = ListTodo;
     readonly Settings = Settings;
     readonly Plus = Plus;
-    readonly User = User;
+    readonly LogOut = LogOut;
 
-    constructor(private router: Router, public uiService: UiService) { }
+    constructor(private router: Router, public uiService: UiService, public authService: AuthService) { }
 
     createNewTask() {
         this.uiService.openCreateTaskModal();
     }
+
+    logout() {
+        this.authService.logout();
+    }
 }
+
